@@ -1,17 +1,23 @@
 <script lang="ts">
 	import { onMount } from 'svelte';
 	import { goto } from '$app/navigation';
-	import { page } from '$app/stores';
 	import { supabase } from '$lib/supabase.js';
-	import { authStore } from '$lib/stores/auth.js';
+	import { getAuthContext } from '$lib/contexts/auth.svelte.js';
 
-	let loading = true;
-	let error = '';
+	// Use runes for reactive state
+	let loading = $state(true);
+	let error = $state('');
+
+	// Get auth context
+	const authContext = getAuthContext();
+
+	// Get URL from props instead of deprecated page store
+	let { data } = $props();
 
 	onMount(async () => {
 		try {
 			// Handle the OAuth callback
-			const { data, error: authError } = await supabase.auth.getSession();
+			const { data: sessionData, error: authError } = await supabase.auth.getSession();
 
 			if (authError) {
 				console.error('Auth callback error:', authError);
@@ -20,12 +26,12 @@
 				return;
 			}
 
-			if (data.session) {
-				// Initialize auth store with the new session
-				await authStore.initialize();
+			if (sessionData.session) {
+				// Initialize auth context with the new session
+				await authContext.initialize();
 
 				// Redirect to dashboard or intended page
-				const redirectTo = $page.url.searchParams.get('redirectTo') || '/';
+				const redirectTo = data?.next || '/';
 				await goto(redirectTo, { replaceState: true });
 			} else {
 				// No session found, redirect to login
@@ -72,7 +78,7 @@
 									<button
 										type="button"
 										class="rounded-md bg-red-50 px-2 py-1.5 text-sm font-medium text-red-800 hover:bg-red-100 focus:outline-none focus:ring-2 focus:ring-red-600 focus:ring-offset-2 focus:ring-offset-red-50"
-										on:click={() => goto('/login')}
+										onclick={() => goto('/login')}
 									>
 										Try Again
 									</button>

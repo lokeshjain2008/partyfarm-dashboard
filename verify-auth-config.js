@@ -12,10 +12,12 @@ const requiredFiles = [
   '.env.local',
   '.env.example',
   'src/lib/auth.ts',
-  'src/lib/stores/auth.ts',
+  'src/lib/contexts/auth.svelte.ts',
+  'src/lib/components/AuthStatus.svelte',
   'src/routes/auth/callback/+page.svelte',
   'src/routes/auth/callback/+page.server.ts',
-  'AUTH_SETUP.md'
+  'AUTH_SETUP.md',
+  'SVELTE5_MIGRATION.md'
 ];
 
 console.log('📁 Checking required files:');
@@ -91,5 +93,10 @@ console.log('2. Update your .env.local file with actual credentials');
 console.log('3. Start Supabase: npx supabase start');
 console.log('4. Start the dev server: npm run dev');
 console.log('5. Test authentication at http://localhost:5173');
+
+console.log('\n📚 Migration Notes:');
+console.log('- Code has been updated to Svelte 5 with runes');
+console.log('- See SVELTE5_MIGRATION.md for migration details');
+console.log('- Use getAuthContext() in components to access auth state');
 
 console.log('\n✨ Auth configuration verification complete!');

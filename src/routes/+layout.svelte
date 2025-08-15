@@ -2,17 +2,21 @@
 	import { onMount } from 'svelte';
 	import '../app.css';
 	import favicon from '$lib/assets/favicon.svg';
-	import { initializeAuthListener, authStore } from '$lib/stores/auth.js';
+	import { setAuthContext, initializeAuthListener } from '$lib/contexts/auth.svelte.js';
 	
+	// Use runes for props
 	let { children } = $props();
+
+	// Set up auth context for the entire app
+	const authContext = setAuthContext();
 
 	// Initialize auth on app startup
 	onMount(async () => {
 		// Initialize the auth listener
-		initializeAuthListener();
+		initializeAuthListener(authContext);
 		
-		// Initialize the auth store
-		await authStore.initialize();
+		// Initialize the auth context
+		await authContext.initialize();
 	});
 </script>
 
