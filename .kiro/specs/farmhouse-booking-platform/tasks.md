@@ -8,7 +8,7 @@
   - _Requirements: 8.1, 8.2_
 
 - [ ] 2. Implement authentication system
-  - [ ] 2.1 Set up Supabase Auth configuration
+  - [x] 2.1 Set up Supabase Auth configuration
     - Configure Google OAuth provider in Supabase
     - Configure phone authentication with SMS provider
     - Set up auth callbacks and redirects
