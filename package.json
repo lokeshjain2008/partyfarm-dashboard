@@ -14,7 +14,22 @@
 		"lint": "prettier --check . && eslint .",
 		"test:unit": "vitest",
 		"test": "npm run test:unit -- --run && npm run test:e2e",
-		"test:e2e": "playwright test"
+		"test:e2e": "playwright test",
+		"supabase:start": "supabase start",
+		"supabase:stop": "supabase stop",
+		"supabase:reset": "supabase db reset",
+		"supabase:types": "supabase gen types typescript --local > src/lib/types/database.ts",
+		"supabase:types:remote": "supabase gen types typescript --linked > src/lib/types/database.ts",
+		"supabase:diff": "supabase db diff --use-migra",
+		"supabase:push": "supabase db push",
+		"supabase:pull": "supabase db pull",
+		"supabase:link": "supabase link",
+		"supabase:status": "supabase status"
+	},
+	"dependencies": {
+		"@supabase/supabase-js": "^2.55.0",
+		"flowbite-svelte": "^1.12.3",
+		"flowbite-svelte-icons": "^2.2.1"
 	},
 	"devDependencies": {
 		"@eslint/compat": "^1.2.5",
@@ -35,6 +50,7 @@
 		"prettier": "^3.4.2",
 		"prettier-plugin-svelte": "^3.3.3",
 		"prettier-plugin-tailwindcss": "^0.6.11",
+		"supabase": "^2.34.3",
 		"svelte": "^5.0.0",
 		"svelte-check": "^4.0.0",
 		"tailwindcss": "^4.0.0",
