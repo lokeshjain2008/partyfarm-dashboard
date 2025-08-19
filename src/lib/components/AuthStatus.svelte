@@ -1,14 +1,16 @@
 <script lang="ts">
-	import { getAuthContext } from '$lib/contexts/auth.svelte.js';
+	import { getAuthContext } from '$lib/contexts/auth.svelte';
 
 	// Get auth context
 	const auth = getAuthContext();
 </script>
 
-<div class="auth-status">
+<div class="rounded-md border bg-gray-50 p-2">
 	{#if auth.loading}
 		<div class="flex items-center space-x-2">
-			<div class="h-4 w-4 animate-spin rounded-full border-2 border-blue-600 border-t-transparent"></div>
+			<div
+				class="h-4 w-4 animate-spin rounded-full border-2 border-blue-600 border-t-transparent"
+			></div>
 			<span class="text-sm text-gray-600">Loading...</span>
 		</div>
 	{:else if auth.isAuthenticated}
@@ -28,9 +30,3 @@
 		</div>
 	{/if}
 </div>
-
-<style>
-	.auth-status {
-		@apply p-2 rounded-md bg-gray-50 border;
-	}
-</style>

@@ -14,7 +14,7 @@
     - Set up auth callbacks and redirects
     - _Requirements: 8.1, 8.4_
 
-  - [ ] 2.2 Create authentication components
+  - [x] 2.2 Create authentication components
     - Build `GoogleLogin.svelte` component with OAuth flow
     - Build `PhoneLogin.svelte` component for phone number entry
     - Build `OTPVerification.svelte` component for SMS verification

@@ -1,6 +1,6 @@
 import { supabase } from './supabase.js';
 import type { AuthError, User, Session } from '@supabase/supabase-js';
-import type { Database } from './types/database.js';
+import type { Database } from './types/database';
 
 export type AuthProvider = 'google' | 'phone';
 
@@ -30,8 +30,8 @@ export async function signInWithGoogle(): Promise<AuthResponse> {
   });
 
   return {
-    user: data.user,
-    session: data.session,
+    user: null, // OAuth redirect doesn't return user immediately
+    session: null, // OAuth redirect doesn't return session immediately
     error,
   };
 }
